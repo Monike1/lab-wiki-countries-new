@@ -1,29 +1,17 @@
 import React, { Component } from 'react';
-// import './App.css';
-// import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-// import CountryDetail from "./CountryDetail"
-import countries from './countries.json';
-import Dashboard from './components/Dashboard';
-import CountryDetail from './components/CountryDetail';
-
-
+import Nav from './components/Nav';
+import {Route} from "react-router-dom";
+import Dashboard from "./components/Dashboard";
+import CountryDetail from "./components/CountryDetail"
+import "./App.css"
 class App extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      countries:countries  
-    }
-    // deleted code below because DeleteButton is a stateless functional component
-    // this.handleDeleteContact.bind(this)
-  }
-
-  
-
   render() {
     return (
       <div>
-        <Dashboard />
-        {/* <CountryDetail /> */}
+        <Nav />
+
+        <Route path="/" component={Dashboard} />
+        <Route path='/country-detail/:id' component={CountryDetail} />
       </div>
     );
   }
