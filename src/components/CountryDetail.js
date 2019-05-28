@@ -1,12 +1,30 @@
 import React from 'react';
-import countries from "../countries.json"
+import countries from "../countries.json";
+import Country from './Country';
 
 function CountryDetail(props) {
-    debugger
+    let borders = <td>This country doesn't have any borders</td>
+   
+    if(props.location.query.borders.length > 0){
+     
+      borders = countries.filter(country => {
+          return props.location.query.borders.includes(country.cca3);
+        }).map((country, index) => {
+          return (
+    
+            <Country 
+            key={index.toString()}
+            {...country} 
+            showDetail={props.showDetail} />
+            
+          )
+        })
+    }
+
 
     return (
      
-      <div className="col-6 offset-6">
+      <div className="col">
         <table className="table">
           <thead>
             <tr colspan="2">
@@ -24,8 +42,11 @@ function CountryDetail(props) {
             </tr>
             <tr>
               <td>Borders</td>
-              <td>{props.location.query.borders}
-                </td>
+              <td>
+                <ul>
+                  {borders}
+                </ul>
+              </td>
             </tr>
           </tbody>
         </table>
